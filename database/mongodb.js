@@ -6,6 +6,16 @@ var listSchema = new Schema({
   text: String, href: String
 });
 
-var list = mongoose.model('lists', listSchema);
+var poetySchema = new Schema({
+  id: String,
+  title: String,
+  content: String
+})
+
+var mongodbList = {
+  list: mongoose.model('lists', listSchema),
+  poety: mongoose.model("poetys", poetySchema)
+}
+
 //exports.student=student;
-module.exports = list;
+module.exports = mongodbList;
