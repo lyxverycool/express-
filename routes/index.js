@@ -1,9 +1,11 @@
 var express = require('express');
+var session = require('express-session');
 var router = express.Router();
 var cheerio = require('cheerio');
 var superagent = require('superagent');
 var mongodbList = require('../database/mongodb');
 var dealFn = require("../database/dealfn");
+var RedisStore = require("connect-redis")(session);
 
 router.get('/', function (req, res, next) {
   res.render('index', { title: 'Index' });
@@ -58,7 +60,8 @@ router.get('/index/addPoetyList', function (req, res, next) {
     mongodbList.poety.insertMany(data, function (rs) {
       res.json({ success: true })
     })
-    //res.send(JSON.stringify(data));
+  }).catch((err) => {
+    res.send(err);
   })
 });
 
@@ -86,6 +89,27 @@ router.get('/index/poetyContent', function (req, res) {
   } else {
     res.send("参数请求错误！")
   }
+})
+
+router.use(session({
+  store: new RedisStore({
+    host: "localhost",
+    port: 6379,
+    db: 0
+  }),
+  resave: false,
+  saveUninitialized: true,
+  secret: 'keyboard cat',
+  cookie: { maxAge: 100000 }
+}))
+
+router.post('/index/redis', function (req, res) {
+  var user = {
+    companyName: req.body.companyName,
+    mobileNo: req.body.mobileNo
+  }
+  req.session.user = user;
+  res.json({ success: true })
 })
 
 module.exports = router;
