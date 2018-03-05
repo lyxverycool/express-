@@ -45,6 +45,24 @@ router.get('/index/getCnblogs', function (req, res, next) {
   })
 });
 
+//爬取知乎图片下载到本地
+router.get('/index/getImgs', function (req, res, next) {
+  //res.header("Access-Control-Allow-Origin", "*");
+  superagent.get('http://daily.zhihu.com/').end(function (err, sres) {
+    if (err) {
+      return next(err)
+    }
+    var $ = cheerio.load(sres.text);
+    var items = [];
+    $(".wrap .preview-image").each(function (index, ele) {
+      var element = $(ele);
+      items.push(element.attr("src"));
+    });
+    dealFn.downLoadImg(items).then((re) => {
+      res.send(re)
+    });
+  })
+});
 
 //增加一条数据到mongoose
 router.post('/index/addList', function (req, res, next) {
