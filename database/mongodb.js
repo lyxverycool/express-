@@ -12,10 +12,26 @@ var poetySchema = new Schema({
   content: String
 })
 
+var adminSchema = new Schema({
+  user_name: String,
+  password: String,
+  id: Number,
+  create_time: String,
+  admin: { type: String, default: '管理员' },
+  status: Number,  //1:普通管理、 2:超级管理员
+  avatar: { type: String, default: 'default.jpg' },
+  city: String,
+})
+
+adminSchema.index({ id: 1 });
+
 var mongodbList = {
   list: mongoose.model('lists', listSchema),
-  poety: mongoose.model("poetys", poetySchema)
+  poety: mongoose.model("poetys", poetySchema),
+  admin: mongoose.model("admins", adminSchema)
 }
+
+
 
 //exports.student=student;
 module.exports = mongodbList;

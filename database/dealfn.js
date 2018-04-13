@@ -26,10 +26,10 @@ let dealFn = {
         //获取图片名  
         let imgName = imgUrl.split('/').pop();
         //下载图片存放到指定目录
-        let stream = fs.createWriteStream(`./public/images/${imgName}`);
+        let stream = fs.createWriteStream(`./public/img/${imgName}`);
         let req = superagent.get(imgUrl);
         req.pipe(stream);
-        console.log(`开始下载图片 https:${imgUrl} --> ./imgs/${imgName}`);
+        console.log(`开始下载图片 https:${imgUrl} --> ./img/${imgName}`);
       })
       resovle("下载完成！")
     });

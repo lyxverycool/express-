@@ -94,8 +94,24 @@ router.get('/index/poetyList', function (req, res) {
   })
 })
 //根据id查详情
-router.get('/index/poetyContent', function (req, res) {
-  var id = req.query.id;
+// router.get('/index/poetyContent', function (req, res) {
+//   var id = req.query.id;
+//   if (id) {
+//     mongodbList.poety.findOne({ "_id": id }, { content: 1 }, function (err, result) {
+//       if (err) {
+//         res.send(err)
+//       } else {
+//         res.send(result)
+//       }
+//     })
+//   } else {
+//     res.send("参数请求错误！")
+//   }
+// })
+
+router.post('/index/poetyContent', function (req, res) {
+  console.log(req.body)
+  var id = req.body.id;
   if (id) {
     mongodbList.poety.findOne({ "_id": id }, { content: 1 }, function (err, result) {
       if (err) {
