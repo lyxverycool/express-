@@ -113,7 +113,7 @@ router.post('/index/poetyContent', function (req, res) {
   console.log(req.body)
   var id = req.body.id;
   if (id) {
-    mongodbList.poety.findOne({ "_id": id }, { content: 1 }, function (err, result) {
+    mongodbList.poety.findOne({ "_id": id }, { title: 1, content: 1 }, function (err, result) {
       if (err) {
         res.send(err)
       } else {
