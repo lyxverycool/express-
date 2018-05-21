@@ -93,27 +93,22 @@ router.get('/index/poetyList', function (req, res) {
     }
   })
 })
+//清空诗文列表
+router.get('/index/clearPoetyList', function (req, res) {
+  mongodbList.poety.remove({}, function (err, result) {
+    if (err) {
+      res.send(err)
+    } else {
+      res.send("清除列表成功！")
+    }
+  })
+})
 //根据id查详情
-// router.get('/index/poetyContent', function (req, res) {
-//   var id = req.query.id;
-//   if (id) {
-//     mongodbList.poety.findOne({ "_id": id }, { content: 1 }, function (err, result) {
-//       if (err) {
-//         res.send(err)
-//       } else {
-//         res.send(result)
-//       }
-//     })
-//   } else {
-//     res.send("参数请求错误！")
-//   }
-// })
-
 router.post('/index/poetyContent', function (req, res) {
   console.log(req.body)
   var id = req.body.id;
   if (id) {
-    mongodbList.poety.findOne({ "_id": id }, { title: 1, content: 1 }, function (err, result) {
+    mongodbList.poety.findOne({ "_id": id }, { title: 1, content: 1, createTime: 1 }, function (err, result) {
       if (err) {
         res.send(err)
       } else {

@@ -9,7 +9,11 @@ var listSchema = new Schema({
 var poetySchema = new Schema({
   id: String,
   title: String,
-  content: String
+  content: String,
+  createTime: {
+    type: Date,
+    default: Date.now
+  }
 })
 
 var adminSchema = new Schema({
