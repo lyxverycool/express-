@@ -7,9 +7,9 @@ var mongodbList = require('../database/mongodb');
 var dealFn = require("../database/dealfn");
 var RedisStore = require("connect-redis")(session);
 
-router.get('/', function (req, res, next) {
-  res.render('index', { title: 'Index' });
-});
+// router.get('/', function (req, res, next) {
+//   res.render('index', { title: 'Index' });
+// });
 
 //查询数据库
 router.get('/index/list', function (req, res) {
