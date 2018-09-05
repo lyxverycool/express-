@@ -101,5 +101,22 @@ class Poety {
       })
     }
   }
+  async readPoetyJson(req, res, next) {
+    try {
+      const data = JSON.parse(await File.readFile('./poety.json'))
+      await poetyModel.insertMany(data)
+      res.send({
+        state: '1',
+        type: 'success_read_poetJson',
+        message: '读取诗文成功'
+      })
+    } catch (err) {
+      res.send({
+        status: '0',
+        type: 'error_read_poetJson',
+        message: '读取诗文失败'
+      })
+    }
+  }
 }
 export default new Poety();
