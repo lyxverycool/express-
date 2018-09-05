@@ -5,8 +5,10 @@ import Poety from '../controller/poety'
 
 const router = express.Router()
 
-router.get('/queryPoety', Poety.queryPoety);
+router.post('/queryPoety', Poety.queryPoety);
 router.post('/addPoety', Poety.addPoety);
 router.post('/poetyDetail', Poety.poetyDetail);
+router.get('/removePoety', Poety.removePoety);
+router.get('/savePoetyJson', Poety.savePoetyJson);
 
 export default router;
