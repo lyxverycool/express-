@@ -17,7 +17,7 @@ class List {
             res.send({
                 status: '0',
                 type: 'error_query_list_all',
-                message: '查询列表所有失败'
+                message: err
             })
         }
     }

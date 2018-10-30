@@ -9,7 +9,7 @@ class Poety {
     try {
       const { type, page } = req.body;
       let filter = {}
-      if (type) {
+      if (type !== 'all') {
         filter = { type }
       }
       const total = await poetyModel.find(filter).count();
@@ -28,7 +28,7 @@ class Poety {
       res.send({
         status: '0',
         type: 'error_get_poetyList',
-        message: '获取诗文列表失败'
+        message: err
       })
     }
   }
@@ -46,7 +46,7 @@ class Poety {
       res.send({
         status: '0',
         type: 'error_add_poety',
-        message: '添加诗文失败'
+        message: err
       })
     }
   }
@@ -64,7 +64,7 @@ class Poety {
       res.send({
         status: '0',
         type: 'error_get_poetyDetail',
-        message: '获取诗文详情失败'
+        message: err
       })
     }
   }
@@ -80,7 +80,7 @@ class Poety {
       res.send({
         status: '0',
         type: 'error_remove_poety',
-        message: '清除诗文失败'
+        message: err
       })
     }
   }
@@ -97,7 +97,7 @@ class Poety {
       res.send({
         status: '0',
         type: 'error_save_poetJson',
-        message: '生成诗文失败'
+        message: err
       })
     }
   }
@@ -114,7 +114,7 @@ class Poety {
       res.send({
         status: '0',
         type: 'error_read_poetJson',
-        message: '读取诗文失败'
+        message: err
       })
     }
   }

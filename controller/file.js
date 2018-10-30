@@ -1,4 +1,3 @@
-import listModel from '../models/list';
 import fs from 'fs';
 
 class File {
