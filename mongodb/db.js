@@ -2,7 +2,10 @@
 
 import mongoose from 'mongoose';
 import chalk from 'chalk';
-mongoose.connect('mongodb://localhost:27017/db1');
+
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost:27017/db1', { useMongoClient: true });
+
 const db = mongoose.connection;
 
 db.once('open', () => {

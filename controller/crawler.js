@@ -13,7 +13,6 @@ class Crawler {
       let items = [];
       $(".msgCnt").each(function (index, ele) {
         const msgCnt = $(ele).text();
-        console.log(msgCnt)
         items.push({
           text: msgCnt
         })
@@ -36,19 +35,19 @@ class Crawler {
   async getData(i) {
     const htmlMsg = await superagent.get('https://www.cnblogs.com/lyxverycool/default.html?page=' + i);
     const $ = cheerio.load(htmlMsg.text);
-    let items = [];
-    $(".day").each(function (index, ele) {
-      const msgDay = $(ele).find(".dayTitle a").text();
-      const msgTitle = $(ele).find(".postTitle a").text();
-      const msgHref = $(ele).find(".postTitle a").attr("href");
-      items.push({
-        day: msgDay,
-        title: msgTitle,
-        href: msgHref
-      })
-    });
-    console.log(items)
-    return items;
+    // let items = [];
+    // $(".day").each(function (index, ele) {
+    //   const msgDay = $(ele).find(".dayTitle a").text();
+    //   const msgTitle = $(ele).find(".postTitle a").text();
+    //   const msgHref = $(ele).find(".postTitle a").attr("href");
+    //   items.push({
+    //     day: msgDay,
+    //     title: msgTitle,
+    //     href: msgHref
+    //   })
+    // });
+    // console.log(items)
+    return await $;
   }
   //爬取博客园文章所有标题
   async getCnblogs(req, res, next) {
