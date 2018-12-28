@@ -1,5 +1,6 @@
 import superagent from 'superagent';
 import cheerio from 'cheerio';
+import File from './file';
 
 class Crawler {
   constructor() {
@@ -54,7 +55,7 @@ class Crawler {
     try {
       async function forEachCrawler() {
         let allData = [];
-        for (var i = 0; i < 6; i++) {
+        for (var i = 0; i < 7; i++) {
           const htmlMsg = await superagent.get('https://www.cnblogs.com/lyxverycool/default.html?page=' + i);
           const $ = cheerio.load(htmlMsg.text);
           let items = [];
@@ -84,6 +85,32 @@ class Crawler {
       res.send({
         status: '0',
         type: 'error_get_cnblogs',
+        message: err.message
+      })
+    }
+  }
+
+
+  //爬取知乎图片
+  async getZhihuImgs(req, res, next) {
+    try {
+      const htmlMsg = await superagent.get('http://daily.zhihu.com/');
+      var $ = cheerio.load(htmlMsg.text);
+      var items = [];
+      $(".wrap .preview-image").each(function (index, ele) {
+        var element = $(ele);
+        items.push(element.attr("src"));
+      });
+      const msg = await File.downLoadImgs(items)
+      res.send({
+        status: '1',
+        type: 'success_get_zhihuimgs',
+        message: msg,
+      })
+    } catch (err) {
+      res.send({
+        status: '0',
+        type: 'error_get_zhihuimgs',
         message: err.message
       })
     }

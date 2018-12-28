@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./index.js",
+    "start": "nodemon ./index.js",
     "dev": "cross-env NODE_ENV=development supervisor --harmony index.js"
   },
   "dependencies": {
